@@ -13,6 +13,7 @@ import {
   FormLabel,
   FormMessage,
 } from "../ui/form";
+import { toast } from "react-hot-toast";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
 import { useState } from "react";
@@ -34,12 +35,10 @@ export const StoreModal = () => {
     try {
       setLoading(true);
       const response = await axios.post("/api/stores", values);
-      console.log(
-        "🚀 ~ file: store-modal.tsx:37 ~ onSubmit ~ response:",
-        response.data
-      );
+
+      window.location.assign(`${response.data.id}`);
     } catch (error) {
-      console.log("🚀 ~ file: store-modal.tsx:36 ~ onSubmit ~ error:", error);
+      toast.error("Something went wrong.");
     } finally {
       setLoading(false);
     }
